@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>sage自用手册</title>
+      <link href="/2025/08/04/sage%E8%87%AA%E7%94%A8%E6%89%8B%E5%86%8C/"/>
+      <url>/2025/08/04/sage%E8%87%AA%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pari.algdep(<span class="string">''</span>, )<span class="comment">#可以用来计算极小多项式，前面填多项式后面填幂次</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">._pari_with_name(<span class="string">'x'</span>)<span class="comment">#sage自带的快速计算两多项式的最大公约式的方法</span></span><br></pre></td></tr></table></figure><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">two_squares()<span class="comment">#sage自带的将n分解成形如平方和恢复两个规模相近的数</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>python基础语法笔记</title>
       <link href="/2025/08/04/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
       <url>/2025/08/04/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/</url>
