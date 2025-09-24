@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="变量 定义 给一个内容绑定了一个标签名（变量不是类似于一种“盒子”） 通过&#x3D;来定义变量，变量名&#x3D;内容 动态类型，不需要规定变量的类型（可以通过 变量名：类型 &#x3D; 内容 来进行标注） 变量名  只能包含字母，数字，下划线，不能有空格和其他符号。 只能以字母，下划线开头，不能以数字开头，而且大小写敏感。 不能用关键字（例如 if def等）作为变量名，不推荐使用内置函数名作为变量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python">
+<meta property="og:url" content="http://example.com/2025/06/24/python/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="变量 定义 给一个内容绑定了一个标签名（变量不是类似于一种“盒子”） 通过&#x3D;来定义变量，变量名&#x3D;内容 动态类型，不需要规定变量的类型（可以通过 变量名：类型 &#x3D; 内容 来进行标注） 变量名  只能包含字母，数字，下划线，不能有空格和其他符号。 只能以字母，下划线开头，不能以数字开头，而且大小写敏感。 不能用关键字（例如 if def等）作为变量名，不推荐使用内置函数名作为变量">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-24T02:49:13.000Z">
+<meta property="article:modified_time" content="2025-09-24T02:49:43.917Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>python</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/links">Links</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/07/10/NewStarctf2024/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/24/python/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/24/python/&text=python"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/24/python/&is_video=false&description=python"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python&body=Check out this article: http://example.com/2025/06/24/python/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/24/python/&name=python&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/24/python/&t=python"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-number">1.0.2.</span> <span class="toc-text">变量名</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E4%B8%8E%E8%BF%90%E7%AE%97"><span class="toc-number">2.1.</span> <span class="toc-text">数字与运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E4%B9%8B%E9%97%B4%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.1.1.</span> <span class="toc-text">整数与浮点数之间转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%AE%97"><span class="toc-number">2.1.2.</span> <span class="toc-text">运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">复数类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%8F%B7"><span class="toc-number">3.1.</span> <span class="toc-text">引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="toc-number">3.2.</span> <span class="toc-text">特殊字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BC%80"><span class="toc-number">3.3.</span> <span class="toc-text">前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">3.4.</span> <span class="toc-text">常用方法</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        python
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-24T02:49:13.000Z" class="dt-published" itemprop="datePublished">2025-06-24</time>
+        
+        (Updated: <time datetime="2025-09-24T02:49:43.917Z" class="dt-updated" itemprop="dateModified">2025-09-24</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="变量">变量</h2>
+<h4 id="定义">定义</h4>
+<p>给一个内容绑定了一个标签名（变量不是类似于一种“盒子”）</p>
+<p>通过=来定义变量，变量名=内容</p>
+<p>动态类型，不需要规定变量的类型（可以通过 <strong>变量名：类型 =
+内容</strong> 来进行标注）</p>
+<h4 id="变量名">变量名</h4>
+<ul>
+<li>只能包含字母，数字，下划线，不能有空格和其他符号。</li>
+<li>只能以字母，下划线开头，不能以数字开头，而且大小写敏感。</li>
+<li>不能用关键字（例如 if
+def等）作为变量名，不推荐使用内置函数名作为变量名</li>
+<li>清晰明确，风格统一<strong>（便于编译和修改）</strong></li>
+<li>全大写一般表示常量，不建议使用双下划线开头或者开头结尾。</li>
+</ul>
+<h2 id="数据类型">数据类型</h2>
+<h3 id="数字与运算">数字与运算</h3>
+<ul>
+<li>1是整数，1.是浮点数</li>
+</ul>
+<h4 id="整数与浮点数之间转换">整数与浮点数之间转换</h4>
+<ul>
+<li>int(…):向0舍入</li>
+<li>round():向偶舍入<strong>(四舍六入五凑偶，可以当成四舍五入)</strong></li>
+<li>math.floor(…)，math.ceil(…)，下取整，上取整<strong>(需要import
+math函数)</strong></li>
+</ul>
+<h4 id="运算">运算</h4>
+<ul>
+<li>加减乘除正常，左右有整数结果就是整数，有浮点数结果就是浮点数</li>
+<li>/除法，结果为浮点数(即使可以整除)</li>
+<li>//整除，结果是整数，向下取整</li>
+<li>%取模，<span
+class="math display"><em>a</em>%<em>b</em> = <em>a</em> − (⌊<em>a</em>/<em>b</em>⌋) ⋅ <em>b</em>  (和
+C 的行为不一致)</span></li>
+<li><code>pow(a, b, mod)</code> 的用法：
+<ul>
+<li><strong>计算幂次并取模：</strong> 当 <code>mod</code> 参数提供且不为
+-1 时，<code>pow(a, b, mod)</code> 会计算 <span
+class="math inline"><em>a</em><sup><em>b</em></sup> (mod  <em>m</em><em>o</em><em>d</em>)</span>。</li>
+<li><strong>计算乘法逆元：</strong> 当 <code>mod</code> 参数为 -1
+时，<code>pow(a, b, -1)</code> (通常 <span
+class="math inline"><em>b</em></span> 在此场景下代表模数，即计算 <span
+class="math inline"><em>a</em></span> 模 <span
+class="math inline"><em>b</em></span> 的乘法逆元)
+会计算乘法逆元。这通常意味着寻找一个整数 <span
+class="math inline"><em>x</em></span> 使得 <span
+class="math inline"><em>a</em><em>x</em> ≡ 1 (mod  <em>b</em>)</span></li>
+</ul></li>
+<li>更多的运算通过math，numpy，scipy等包进行计算</li>
+</ul>
+<h3 id="复数类型">复数类型</h3>
+<ul>
+<li>python中内置了复数类型，1+2j形式就表示一个复数，其中j即虚数单位i</li>
+<li>或者使用complex（实部，虚部）形式定义复数</li>
+<li>可以进行复数的加减乘除</li>
+<li>属性与方法 ：</li>
+<li><ul>
+<li>c.real:实部</li>
+<li>c.imag:虚部</li>
+<li>conjugate():返回共轭复数</li>
+</ul></li>
+</ul>
+<h2 id="字符串">字符串</h2>
+<h3 id="引号">引号</h3>
+<ul>
+<li>单引号 <code>'...'</code>、双引号 <code>"..."</code>、三引号
+<code>'''...'''</code> / <code>"""..."""</code>（可以换行）</li>
+</ul>
+<h3 id="特殊字符">特殊字符</h3>
+<ul>
+<li><code>\n</code> 换行，<code>\t</code> 制表符，<code>\r</code>
+回车</li>
+<li><code>\\</code> 单反斜杠，<code>\"</code> 双引号，<code>\/</code>
+斜杠（只有一个会出问题）</li>
+<li><code>……</code> 等</li>
+</ul>
+<h3 id="前缀">前缀</h3>
+<ul>
+<li><code>r-string: r"..."</code>：引号中不进行转义，即一个
+<code>\</code> 就代表斜杠本身</li>
+<li><code>f-string: f"..."</code>：格式化字符串</li>
+<li><code>b-string: b"..."</code>：将字符串转为 bytes，只能包含 ASCII
+字符</li>
+</ul>
+<h3 id="常用方法">常用方法</h3>
+<ul>
+<li><strong>拼接</strong>：直接将字符串“相加”</li>
+<li><code>"..."</code>.upper() /
+<code>"..."</code>.lower()：转为全大写、全小写</li>
+<li><code>"..."</code>.title()：单词首字母大写</li>
+<li><code>"..."</code>.strip()：删除字符串首尾空白（包含空格和制表符）</li>
+<li><code>"..."</code>.lstrip() /
+<code>"..."</code>.rstrip()：删除左、右端空白</li>
+<li><code>"..."</code>.split(c)：根据字符 <code>c</code>
+来拆分字符串得到列表，默认拆分空白</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/links">Links</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-number">1.0.2.</span> <span class="toc-text">变量名</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E4%B8%8E%E8%BF%90%E7%AE%97"><span class="toc-number">2.1.</span> <span class="toc-text">数字与运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E4%B9%8B%E9%97%B4%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.1.1.</span> <span class="toc-text">整数与浮点数之间转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%AE%97"><span class="toc-number">2.1.2.</span> <span class="toc-text">运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">复数类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%8F%B7"><span class="toc-number">3.1.</span> <span class="toc-text">引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="toc-number">3.2.</span> <span class="toc-text">特殊字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BC%80"><span class="toc-number">3.3.</span> <span class="toc-text">前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">3.4.</span> <span class="toc-text">常用方法</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/24/python/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/24/python/&text=python"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/24/python/&is_video=false&description=python"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python&body=Check out this article: http://example.com/2025/06/24/python/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/24/python/&title=python"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/24/python/&name=python&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/24/python/&t=python"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/links">Links</a></li><!--
+     -->
+      </ul>
+	  <ul>
+            
+              <!-- 不蒜子统计 -->
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+          </ul>
+    </nav>
+  </div>
+</footer>
+
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
