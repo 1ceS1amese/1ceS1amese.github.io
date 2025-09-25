@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>z3求解器</title>
+      <link href="/2025/09/25/z3%E6%B1%82%E8%A7%A3%E5%99%A8/"/>
+      <url>/2025/09/25/z3%E6%B1%82%E8%A7%A3%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="介绍">介绍</h2><p>z3是一个开源的约束求解器，在处理一些给定一定约束条件求解我们需要的一组特定解的时候非常有效### 安装 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install z3-solver</span><br></pre></td></tr></table></figure> ### 示例 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> z3 <span class="keyword">import</span> *</span><br><span class="line">x = Int(<span class="string">&#x27;x&#x27;</span>)<span class="comment">#定义整型</span></span><br><span class="line">y = Int(<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">solve(x &gt; <span class="number">10</span>, y == x + <span class="number">2</span>, y &lt; <span class="number">15</span>)<span class="comment">#在约束条件较少的情况下solve可以直接帮我们找到一组对应解，并且也只会返回一组对应解</span></span><br><span class="line"><span class="built_in">print</span>(solve)</span><br></pre></td></tr></table></figure> ### 常用示例<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> z3 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">x = Int(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">y = Real(<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">z = BitVec(<span class="string">&#x27;z&#x27;</span>, <span class="number">32</span>)</span><br><span class="line">p = <span class="built_in">bool</span>(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line"></span><br><span class="line">s = z3.solver()<span class="comment">#创建一个求解器，也就是一组约束的集合</span></span><br><span class="line">s.add(x + y == <span class="number">10</span>, x - y == <span class="number">5</span>)<span class="comment">#添加约束条件</span></span><br><span class="line"><span class="built_in">print</span>(s.check())<span class="comment">#检查是否有解</span></span><br><span class="line">z3.sat <span class="comment">#约束可以被满足</span></span><br><span class="line">z3.unsat <span class="comment">#约束不被满足</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(s.model())<span class="comment">#输出解，只有一组对应解</span></span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>APT单兵作战笔记</title>
       <link href="/2025/09/23/APT%E5%8D%95%E5%85%B5%E4%BD%9C%E6%88%98%E7%AC%94%E8%AE%B0/"/>
       <url>/2025/09/23/APT%E5%8D%95%E5%85%B5%E4%BD%9C%E6%88%98%E7%AC%94%E8%AE%B0/</url>
