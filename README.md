@@ -17,10 +17,6 @@ npm run dev    # dev server
 npm run build  # output → dist/
 ```
 
-## Deploy
-
-See [DEPLOYMENT.md](./DEPLOYMENT.md) — GitHub Actions workflow included.
-
 ## License
 
 MIT © 2024 [1ceS1amese](https://github.com/1ceS1amese)
